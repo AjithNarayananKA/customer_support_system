@@ -37,17 +37,16 @@ model_loader = ModelLoader()
 
 def invoke_chain(query:str):
     
-    retriever=retriever_obj.load_retriever()
+    retriever = retriever_obj.load_retriever()
     prompt = ChatPromptTemplate.from_template(PROMPT_TEMPLATES["product_bot"])
-    llm= model_loader.load_llm()
+    llm = model_loader.load_llm()
     
-    chain=(
-        {"context": retriever, "question": RunnablePassthrough()}
-        | prompt
-        | llm
-        | StrOutputParser()
-    
-    )
+    chain = (
+            {"context": retriever, "question": RunnablePassthrough()}
+            | prompt
+            | llm
+            | StrOutputParser()
+            )
     
     output=chain.invoke(query)
     
