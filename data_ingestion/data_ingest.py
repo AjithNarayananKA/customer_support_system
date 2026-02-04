@@ -42,6 +42,11 @@ class ingest_data:
         
         return vector_store,inserted_ids
 
-
 if __name__ == '__main__':
-    data_ingestion = ingest_data()
+    data_ingest = ingest_data()
+    vector_store, inserted_ids =data_ingest.data_ingestion(None)
+    
+    # print(f"\nInserted {len(inserted_ids)} documents.")
+    results=vector_store.similarity_search(query="can you tell me the low budget headphone")
+    for res in results:
+        print(f"{res.page_content} {res.metadata}")
